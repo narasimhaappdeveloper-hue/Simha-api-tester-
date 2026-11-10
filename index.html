@@ -4,18 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b1120">
-
+  <meta name="theme-color" content="#080f1d">
   <title>SIMHA API Tester</title>
 
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="./css/style.css?v=3">
 </head>
-
 <body>
 
   <div class="app-container">
 
-    <!-- Header -->
     <header class="header">
       <div class="brand">
         <div class="brand-icon">S</div>
@@ -24,27 +21,20 @@
           <p>Professional API Testing Tool</p>
         </div>
       </div>
-
       <span class="online-status">
-        <span class="status-dot"></span>
-        Online
+        <span class="status-dot"></span> Ready
       </span>
     </header>
 
-
-    <!-- Request Section -->
     <main>
 
-      <section class="panel request-panel">
-
+      <section class="panel">
         <div class="section-heading">
           <h2>API Request</h2>
           <span class="section-tag">REQUEST</span>
         </div>
 
-        <!-- Method and URL -->
         <div class="request-bar">
-
           <select id="methodSelect" class="method-select">
             <option value="GET">GET</option>
             <option value="POST">POST</option>
@@ -56,66 +46,41 @@
             type="url"
             id="apiUrl"
             placeholder="Enter API URL..."
-            autocomplete="url"
           >
 
-          <button id="sendBtn" class="send-btn">
-            Send
-          </button>
-
+          <button id="sendBtn" class="send-btn">Send</button>
         </div>
 
-
-        <!-- Request Body -->
         <div class="request-body">
-
           <div class="body-heading">
             <label for="bodyInput">Request Body</label>
             <span>JSON</span>
           </div>
 
-          <textarea
-            id="bodyInput"
-            rows="8"
-            spellcheck="false"
-          >{
+          <textarea id="bodyInput" rows="8" spellcheck="false">{
   "title": "SIMHA API Tester",
   "body": "My first API request",
   "userId": 1
 }</textarea>
 
           <p class="help-text">
-            POST and PUT methods కోసం JSON data ఇక్కడ ఇవ్వండి.
+            POST and PUT methods కోసం JSON data ఇవ్వండి.
           </p>
-
         </div>
 
-        <p id="message" class="message"></p>
-
+        <p id="message" class="message" aria-live="polite"></p>
       </section>
 
-
-      <!-- Response Section -->
-      <section class="panel response-panel">
-
+      <section class="panel">
         <div class="section-heading">
           <h2>API Response</h2>
-
           <div class="response-actions">
-            <button id="copyBtn" class="secondary-btn">
-              Copy
-            </button>
-
-            <button id="clearBtn" class="secondary-btn">
-              Clear
-            </button>
+            <button id="copyBtn" class="secondary-btn">Copy</button>
+            <button id="clearBtn" class="secondary-btn">Clear</button>
           </div>
         </div>
 
-
-        <!-- Statistics -->
         <div class="stats-grid">
-
           <div class="stat-card">
             <span>Status</span>
             <strong id="status">-</strong>
@@ -130,62 +95,43 @@
             <span>Response Size</span>
             <strong id="size">-</strong>
           </div>
-
         </div>
 
-
-        <!-- JSON Response -->
         <div class="response-content">
-
           <div class="response-title">
             <span>Response Body</span>
             <span class="json-label">JSON</span>
           </div>
-
           <pre id="response">Your API response will appear here...</pre>
-
         </div>
-
       </section>
 
-
-      <!-- Diagnostic Center -->
-      <section class="panel diagnostic-panel">
-
+      <section class="panel">
         <div class="section-heading">
           <h2>Diagnostic Center</h2>
           <span class="section-tag">ANALYSIS</span>
         </div>
 
         <div class="diagnostic-content">
-
           <div class="diagnostic-item">
             <span>Problem Type</span>
-            <strong id="errorType">-</strong>
+            <strong id="errorType">Waiting for request</strong>
           </div>
 
           <div class="diagnostic-item">
             <span>Description</span>
-            <p id="errorDescription">
-              API diagnostics will appear here.
-            </p>
+            <p id="errorDescription">API diagnostics will appear here.</p>
           </div>
 
           <div class="diagnostic-item">
             <span>Suggested Solution</span>
-            <p id="errorSolution">
-              No solution available yet.
-            </p>
+            <p id="errorSolution">No action required yet.</p>
           </div>
-
         </div>
-
       </section>
 
     </main>
 
-
-    <!-- Footer -->
     <footer class="footer">
       <p>SIMHA API Tester</p>
       <span>Built by Narasimha</span>
@@ -193,9 +139,6 @@
 
   </div>
 
-
-  <!-- JavaScript -->
-  <script src="js/app.js"></script>
-
+  <script src="./js/app.js?v=3"></script>
 </body>
 </html>
