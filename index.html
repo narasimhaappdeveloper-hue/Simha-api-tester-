@@ -1,144 +1,145 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080f1d">
-  <title>SIMHA API Tester</title>
-
-  <link rel="stylesheet" href="./Css/style.css?v=4">
+  <meta name="description" content="SIMHA API Suite - mobile-friendly API testing, diagnostics, test generation and reports.">
+  <title>SIMHA API Suite</title>
+  <link rel="stylesheet" href="./Css/style.css?v=5">
 </head>
 <body>
+<div class="app-shell">
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="SIMHA API Suite home">
+      <span class="brand-mark">S</span>
+      <span><strong>SIMHA API Suite</strong><small>API testing workspace</small></span>
+    </a>
+    <div class="top-actions">
+      <span class="ready"><i></i><span data-i18n="ready">Ready</span></span>
+      <select id="languageSelect" aria-label="Language">
+        <option value="en">English</option><option value="te">తెలుగు</option>
+      </select>
+    </div>
+  </header>
 
-  <div class="app-container">
+  <nav class="main-nav" aria-label="Main navigation">
+    <a href="#workspace" class="active" data-i18n="nav_workspace">Workspace</a>
+    <a href="#intelligence" data-i18n="nav_intelligence">Intelligence</a>
+    <a href="#automation" data-i18n="nav_automation">Automation</a>
+    <a href="#professional" data-i18n="nav_professional">Professional</a>
+    <a href="#global" data-i18n="nav_global">Global</a>
+  </nav>
 
-    <header class="header">
-      <div class="brand">
-        <div class="brand-icon">S</div>
-        <div>
-          <h1>SIMHA API Tester</h1>
-          <p>Professional API Testing Tool</p>
-        </div>
+  <main>
+    <section class="welcome">
+      <div><p class="eyebrow">FOUNDATION · INTELLIGENCE · AUTOMATION</p>
+        <h1 data-i18n="hero_title">Test APIs. Understand problems. Build with confidence.</h1>
+        <p data-i18n="hero_sub">A practical API workspace that runs in your browser.</p>
       </div>
-      <span class="online-status">
-        <span class="status-dot"></span> Ready
-      </span>
-    </header>
+      <span class="version">SIMHA · v2.0</span>
+    </section>
 
-    <main>
-
-      <section class="panel">
-        <div class="section-heading">
-          <h2>API Request</h2>
-          <span class="section-tag">REQUEST</span>
-        </div>
-
-        <div class="request-bar">
-          <select id="methodSelect" class="method-select">
-            <option value="GET">GET</option>
-            <option value="POST">POST</option>
-            <option value="PUT">PUT</option>
-            <option value="DELETE">DELETE</option>
-          </select>
-
-          <input
-            type="url"
-            id="apiUrl"
-            placeholder="Enter API URL..."
-          >
-
-          <button id="sendBtn" class="send-btn">Send</button>
-        </div>
-
-        <div class="request-body">
-          <div class="body-heading">
-            <label for="bodyInput">Request Body</label>
-            <span>JSON</span>
-          </div>
-
-          <textarea id="bodyInput" rows="8" spellcheck="false">{
-  "title": "SIMHA API Tester",
-  "body": "My first API request",
+    <section id="workspace" class="panel">
+      <div class="section-title"><div><span class="step">01</span><h2 data-i18n="request_title">API Request</h2></div><span class="tag">FOUNDATION</span></div>
+      <div class="request-line">
+        <select id="methodSelect" class="method-select" aria-label="HTTP method">
+          <option>GET</option><option>POST</option><option>PUT</option><option>PATCH</option><option>DELETE</option>
+        </select>
+        <input id="apiUrl" type="url" placeholder="https://api.example.com/users" autocomplete="url">
+        <button id="sendBtn" class="btn primary">Send</button>
+      </div>
+      <div class="field-grid">
+        <label>Authorization
+          <select id="authType"><option value="none">No Auth</option><option value="bearer">Bearer Token</option><option value="basic">Basic Auth</option><option value="api">API Key Header</option></select>
+        </label>
+        <label id="authValueWrap">Token / API key
+          <input id="authValue" type="password" placeholder="Enter credential (kept in this browser only)" autocomplete="off">
+        </label>
+        <label id="authUserWrap" class="hidden">Username
+          <input id="authUser" type="text" autocomplete="off">
+        </label>
+        <label id="authPassWrap" class="hidden">Password
+          <input id="authPass" type="password" autocomplete="off">
+        </label>
+        <label id="apiKeyNameWrap" class="hidden">API key header name
+          <input id="apiKeyName" type="text" value="x-api-key">
+        </label>
+      </div>
+      <div class="field-grid two">
+        <label>Request headers (JSON)
+          <textarea id="headersInput" rows="4" spellcheck="false">{ "Accept": "application/json" }</textarea>
+        </label>
+        <label>Request body (JSON)
+          <textarea id="bodyInput" rows="4" spellcheck="false">{
+  "title": "SIMHA API Suite",
+  "body": "Test request",
   "userId": 1
 }</textarea>
+        </label>
+      </div>
+      <p class="hint" data-i18n="request_hint">POST, PUT and PATCH usually need a valid JSON body. Use only APIs you are authorized to test.</p>
+      <p id="message" class="message" role="status" aria-live="polite"></p>
+    </section>
 
-          <p class="help-text">
-            POST and PUT methods కోసం JSON data ఇవ్వండి.
-          </p>
-        </div>
+    <section class="panel">
+      <div class="section-title"><div><span class="step">02</span><h2 data-i18n="response_title">Response</h2></div>
+        <div class="button-row"><button id="copyBtn" class="btn secondary">Copy body</button><button id="downloadResponseBtn" class="btn secondary">Download</button><button id="clearBtn" class="btn ghost">Reset</button></div>
+      </div>
+      <div class="metrics">
+        <div><small>Status</small><strong id="status">—</strong></div>
+        <div><small>Response time</small><strong id="time">—</strong></div>
+        <div><small>Response size</small><strong id="size">—</strong></div>
+        <div><small>Result</small><strong id="resultLabel">Waiting</strong></div>
+      </div>
+      <div class="response-head"><strong>Response body</strong><span id="responseType" class="tag">JSON / TEXT</span></div>
+      <pre id="response" class="code-output">Your API response will appear here...</pre>
+    </section>
 
-        <p id="message" class="message" aria-live="polite"></p>
-      </section>
+    <section id="intelligence" class="panel">
+      <div class="section-title"><div><span class="step">03</span><h2 data-i18n="intelligence_title">Intelligence & Smart Debugger</h2></div><span class="tag">INTELLIGENCE</span></div>
+      <div class="insight-grid">
+        <article class="subpanel"><h3>Smart diagnosis</h3><strong id="errorType">Waiting for request</strong><p id="errorDescription">HTTP status and network guidance will appear here.</p><p id="errorSolution" class="solution">Suggested solution will appear here.</p></article>
+        <article class="subpanel"><h3>Local API assistant</h3><p id="assistantAnswer">Send a request, then use Explain result for a practical explanation.</p><button id="explainBtn" class="btn secondary">Explain result</button><p class="tiny">This built-in assistant uses local rules. Generative AI requires a secure server endpoint; never place an AI/API secret in public JavaScript.</p></article>
+      </div>
+    </section>
 
-      <section class="panel">
-        <div class="section-heading">
-          <h2>API Response</h2>
-          <div class="response-actions">
-            <button id="copyBtn" class="secondary-btn">Copy</button>
-            <button id="clearBtn" class="secondary-btn">Clear</button>
-          </div>
-        </div>
+    <section id="automation" class="panel">
+      <div class="section-title"><div><span class="step">04</span><h2 data-i18n="automation_title">Automation & Test Generator</h2></div><span class="tag">AUTOMATION</span></div>
+      <div class="button-row wrap"><button id="generateTestsBtn" class="btn secondary">Generate test cases</button><button id="runTestsBtn" class="btn primary">Run generated tests</button><button id="saveCollectionBtn" class="btn secondary">Save request</button></div>
+      <div id="testCases" class="test-list"><p class="muted">Generate test cases after entering an API URL.</p></div>
+      <p id="testSummary" class="message"></p>
+    </section>
 
-        <div class="stats-grid">
-          <div class="stat-card">
-            <span>Status</span>
-            <strong id="status">-</strong>
-          </div>
+    <section id="professional" class="panel">
+      <div class="section-title"><div><span class="step">05</span><h2 data-i18n="professional_title">Professional Tools</h2></div><span class="tag">PROFESSIONAL</span></div>
+      <div class="tool-grid">
+        <article class="subpanel"><h3>Security checks</h3><p>Basic response-header and HTTPS checks. This is not a penetration test.</p><button id="securityBtn" class="btn secondary">Analyze security</button><div id="securityResult" class="result-box">Run a request to inspect its response.</div></article>
+        <article class="subpanel"><h3>Performance</h3><p>Review measured browser response time and response size.</p><div id="performanceResult" class="result-box">No performance data yet.</div></article>
+        <article class="subpanel"><h3>API documentation</h3><p>Create a starter Markdown reference from your latest request and response.</p><button id="docsBtn" class="btn secondary">Generate documentation</button></article>
+        <article class="subpanel"><h3>Test report</h3><p>Export your latest request, response and generated test results.</p><button id="reportBtn" class="btn secondary">Download report</button></article>
+      </div>
+      <div class="subpanel history-panel">
+        <div class="section-title compact"><h3>Request history</h3><button id="clearHistoryBtn" class="btn ghost">Clear history</button></div>
+        <div id="historyList" class="history-list"><p class="muted">No saved requests yet.</p></div>
+      </div>
+      <div class="subpanel history-panel">
+        <div class="section-title compact"><h3>Saved collection</h3><button id="clearCollectionBtn" class="btn ghost">Clear collection</button></div>
+        <div id="collectionList" class="history-list"><p class="muted">No saved requests.</p></div>
+      </div>
+    </section>
 
-          <div class="stat-card">
-            <span>Response Time</span>
-            <strong id="time">-</strong>
-          </div>
-
-          <div class="stat-card">
-            <span>Response Size</span>
-            <strong id="size">-</strong>
-          </div>
-        </div>
-
-        <div class="response-content">
-          <div class="response-title">
-            <span>Response Body</span>
-            <span class="json-label">JSON</span>
-          </div>
-          <pre id="response">Your API response will appear here...</pre>
-        </div>
-      </section>
-
-      <section class="panel">
-        <div class="section-heading">
-          <h2>Diagnostic Center</h2>
-          <span class="section-tag">ANALYSIS</span>
-        </div>
-
-        <div class="diagnostic-content">
-          <div class="diagnostic-item">
-            <span>Problem Type</span>
-            <strong id="errorType">Waiting for request</strong>
-          </div>
-
-          <div class="diagnostic-item">
-            <span>Description</span>
-            <p id="errorDescription">API diagnostics will appear here.</p>
-          </div>
-
-          <div class="diagnostic-item">
-            <span>Suggested Solution</span>
-            <p id="errorSolution">No action required yet.</p>
-          </div>
-        </div>
-      </section>
-
-    </main>
-
-    <footer class="footer">
-      <p>SIMHA API Tester</p>
-      <span>Built by Narasimha</span>
-    </footer>
-
-  </div>
-
-  <script src="./js/app.js?v=3"></script>
+    <section id="global" class="panel">
+      <div class="section-title"><div><span class="step">06</span><h2 data-i18n="global_title">Global & Premium Roadmap</h2></div><span class="tag">GLOBAL</span></div>
+      <div class="roadmap">
+        <div><b>Multi-language</b><p>English and Telugu interface labels are available.</p></div>
+        <div><b>Documentation</b><p>Generate and download a starter API reference.</p></div>
+        <div><b>Premium features</b><p>Team workspaces, cloud sync, advanced AI and scheduled monitoring need secure backend services. They are not enabled in this free frontend build.</p></div>
+      </div>
+    </section>
+  </main>
+  <footer>SIMHA API Suite <span>Built by Narasimha · Browser-based edition</span></footer>
+</div>
+<script src="./js/app.js?v=5"></script>
 </body>
 </html>
