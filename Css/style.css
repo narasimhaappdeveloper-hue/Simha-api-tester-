@@ -277,3 +277,38 @@ footer {
     padding: 13px;
   }
 }
+.debug-panel {
+  margin-top: 22px;
+}
+
+.debug-subtitle {
+  color: #94a3b8;
+  font-size: 13px;
+  margin: 8px 0 18px;
+}
+
+.debug-item {
+  padding: 13px;
+  background: #0b1120;
+  border: 1px solid #263449;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.debug-item span {
+  display: block;
+  color: #60a5fa;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.debug-item strong,
+.debug-item p {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.debug-item p {
+  color: #cbd5e1;
+  line-height: 1.6;
+}
