@@ -32,13 +32,26 @@
       <label for="apiUrl">Request URL</label>
 
       <div class="request-bar">
-        <span class="method">GET</span>
+        <select id="methodSelect" class="method-select">
+  <option value="GET">GET</option>
+  <option value="POST">POST</option>
+  <option value="PUT">PUT</option>
+  <option value="DELETE">DELETE</option>
+</select>
         <input
           type="url"
           id="apiUrl"
           placeholder="https://jsonplaceholder.typicode.com/users/1"
           autocomplete="url"
         >
+        <div class="request-body">
+  <label for="bodyInput">Request Body (JSON)</label>
+  <textarea id="bodyInput" rows="6">{
+  "title": "SIMHA API Tester",
+  "body": "My first API request",
+  "userId": 1
+}</textarea>
+        </div>
         <button id="sendBtn" class="send-btn">Send</button>
       </div>
 
