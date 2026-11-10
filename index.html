@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101827">
+  <title>SIMHA API Tester</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="brand">
+      <div class="logo">S</div>
+      <div>
+        <h1>SIMHA API Tester</h1>
+        <p>Professional API Testing Workspace</p>
+      </div>
+    </div>
+    <span class="online"><span></span> Ready</span>
+  </header>
+
+  <main class="container">
+
+    <section class="intro">
+      <h2>API Request</h2>
+      <p>Send requests and inspect server responses.</p>
+    </section>
+
+    <section class="request-card">
+      <label for="apiUrl">Request URL</label>
+
+      <div class="request-bar">
+        <span class="method">GET</span>
+        <input
+          type="url"
+          id="apiUrl"
+          placeholder="https://jsonplaceholder.typicode.com/users/1"
+          autocomplete="url"
+        >
+        <button id="sendBtn" class="send-btn">Send</button>
+      </div>
+
+      <div class="request-info">
+        <span>Method: GET</span>
+        <span>Request timeout: 20 seconds</span>
+      </div>
+    </section>
+
+    <section class="response-section">
+
+      <div class="response-heading">
+        <div>
+          <h2>Response</h2>
+          <p>Server response details</p>
+        </div>
+        <button id="clearBtn" class="secondary-btn">Clear</button>
+      </div>
+
+      <div class="stats">
+        <div class="stat-card">
+          <span>Status</span>
+          <strong id="status">--</strong>
+        </div>
+
+        <div class="stat-card">
+          <span>Response Time</span>
+          <strong id="time">--</strong>
+        </div>
+
+        <div class="stat-card">
+          <span>Response Size</span>
+          <strong id="size">--</strong>
+        </div>
+      </div>
+
+      <div class="result-card">
+        <div class="result-toolbar">
+          <span>JSON Response</span>
+          <button id="copyBtn" class="secondary-btn">Copy JSON</button>
+        </div>
+
+        <pre id="response">Your API response will appear here...</pre>
+      </div>
+
+      <p id="message" class="message" role="status">
+        Ready to test your API.
+      </p>
+
+    </section>
+
+    <footer>
+      <p>SIMHA API Tester · Built for Developers</p>
+    </footer>
+
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
