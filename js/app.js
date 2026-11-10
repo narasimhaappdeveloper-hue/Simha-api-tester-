@@ -13,7 +13,8 @@ const messageOutput = document.getElementById("message");
 const errorType = document.getElementById("errorType");
 const errorDescription = document.getElementById("errorDescription");
 const errorSolution = document.getElementById("errorSolution");
-
+const methodSelect = document.getElementById("methodSelect");
+const bodyInput = document.getElementById("bodyInput");
 let latestResponse = "";
 
 // Send API Request
@@ -57,13 +58,31 @@ async function sendRequest() {
   const startTime = performance.now();
 
   try {
-    const response = await fetch(parsedUrl.href, {
-      method: "GET",
-      headers: {
-        "Accept": "application/json"
-      },
-      signal: controller.signal
-    });
+     const method = methodSelect.value;
+
+const options = {
+  method: method,
+  headers: {
+    "Accept": "application/json"
+  },
+  signal: controller.signal
+};
+
+if (method === "POST" || method === "PUT") {
+  let parsedBody;
+
+  try {
+    parsedBody = JSON.parse(bodyInput.value);
+  } catch (error) {
+    showError("Invalid JSON. Please check your Request Body.");
+    return;
+  }
+
+  options.headers["Content-Type"] = "application/json";
+  options.body = JSON.stringify(parsedBody);
+}
+
+const response = await fetch(parsedUrl.href, options);
 
     const responseText = await response.text();
 
@@ -86,6 +105,12 @@ async function sendRequest() {
 
     responseOutput.textContent = displayData;
 
+    if (status >= 200 && status < 300) {
+  errorType.textContent = "Success";
+  errorDescription.textContent = "Request completed successfully.";
+  errorSolution.textContent = "No action required.";
+  return;
+    }
     statusOutput.textContent =
       response.status + " " + response.statusText;
     diagnoseStatus(response.status);
