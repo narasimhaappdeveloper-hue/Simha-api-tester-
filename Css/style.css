@@ -1,8 +1,8 @@
 
-/* ==================================
+/* =========================================
    SIMHA API TESTER
-   Professional Responsive Design
-================================== */
+   FULL PAGE DARK NAVY THEME
+========================================= */
 
 * {
   margin: 0;
@@ -10,21 +10,31 @@
   box-sizing: border-box;
 }
 
+html {
+  min-height: 100%;
+  width: 100%;
+  background: #080f1d;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background: #0b1120;
-  color: #e5e7eb;
+  width: 100%;
   min-height: 100vh;
+  background: #080f1d;
+  color: #e5e7eb;
+  font-family: Arial, sans-serif;
   line-height: 1.5;
 }
+
+/* MAIN CONTAINER */
 
 .app-container {
   width: 100%;
   max-width: 1100px;
-  margin: auto;
+  min-height: 100vh;
+  margin: 0 auto;
   padding: 20px;
+  background: #080f1d;
 }
-
 
 /* HEADER */
 
@@ -36,7 +46,7 @@ body {
   margin-bottom: 28px;
   padding: 18px;
   background: #111c30;
-  border: 1px solid #24334d;
+  border: 1px solid #263750;
   border-radius: 14px;
 }
 
@@ -49,6 +59,7 @@ body {
 .brand-icon {
   width: 46px;
   height: 46px;
+  flex-shrink: 0;
   background: #2563eb;
   border-radius: 12px;
   display: flex;
@@ -84,12 +95,12 @@ body {
   border-radius: 50%;
 }
 
-
 /* PANELS */
 
 .panel {
+  width: 100%;
   background: #111c30;
-  border: 1px solid #24334d;
+  border: 1px solid #263750;
   border-radius: 14px;
   padding: 22px;
   margin-bottom: 20px;
@@ -117,7 +128,6 @@ body {
   letter-spacing: 1px;
 }
 
-
 /* REQUEST BAR */
 
 .request-bar {
@@ -142,7 +152,7 @@ body {
   flex: 1;
   min-width: 0;
   padding: 12px;
-  background: #0b1425;
+  background: #080f1d;
   color: white;
   border: 1px solid #475569;
   border-radius: 8px;
@@ -165,6 +175,7 @@ body {
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
+  transition: background 0.2s;
 }
 
 .send-btn:hover {
@@ -175,7 +186,6 @@ body {
   opacity: 0.6;
   cursor: not-allowed;
 }
-
 
 /* REQUEST BODY */
 
@@ -207,6 +217,7 @@ body {
 .request-body textarea {
   display: block;
   width: 100%;
+  min-height: 150px;
   padding: 14px;
   background: #080f1d;
   color: #a7f3d0;
@@ -225,7 +236,6 @@ body {
   font-size: 12px;
 }
 
-
 /* MESSAGE */
 
 .message {
@@ -234,7 +244,6 @@ body {
   font-size: 13px;
   overflow-wrap: anywhere;
 }
-
 
 /* RESPONSE ACTIONS */
 
@@ -257,7 +266,6 @@ body {
   background: #334155;
 }
 
-
 /* STATISTICS */
 
 .stats-grid {
@@ -268,7 +276,7 @@ body {
 }
 
 .stat-card {
-  background: #0b1425;
+  background: #080f1d;
   border: 1px solid #27364c;
   padding: 14px;
   border-radius: 9px;
@@ -288,7 +296,6 @@ body {
   color: #86efac;
   overflow-wrap: anywhere;
 }
-
 
 /* RESPONSE CONTENT */
 
@@ -322,7 +329,6 @@ body {
   line-height: 1.7;
 }
 
-
 /* DIAGNOSTIC CENTER */
 
 .diagnostic-content {
@@ -331,7 +337,7 @@ body {
 }
 
 .diagnostic-item {
-  background: #0b1425;
+  background: #080f1d;
   border: 1px solid #27364c;
   border-radius: 9px;
   padding: 14px;
@@ -355,14 +361,15 @@ body {
   overflow-wrap: anywhere;
 }
 
-
 /* FOOTER */
 
 .footer {
+  width: 100%;
   text-align: center;
   padding: 20px 10px;
   color: #94a3b8;
   font-size: 12px;
+  background: #080f1d;
 }
 
 .footer span {
@@ -370,7 +377,6 @@ body {
   margin-top: 4px;
   color: #64748b;
 }
-
 
 /* MOBILE RESPONSIVE */
 
@@ -433,6 +439,28 @@ body {
 
   .secondary-btn {
     padding: 7px 9px;
+  }
+
+}
+
+/* SMALL SCREEN */
+
+@media (max-width: 360px) {
+
+  .app-container {
+    padding: 8px;
+  }
+
+  .panel {
+    padding: 12px;
+  }
+
+  .brand h1 {
+    font-size: 15px;
+  }
+
+  .online-status {
+    font-size: 10px;
   }
 
 }
