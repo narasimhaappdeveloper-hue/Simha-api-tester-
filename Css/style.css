@@ -312,3 +312,33 @@ footer {
   color: #cbd5e1;
   line-height: 1.6;
 }
+.method-select {
+  padding: 10px;
+  border-radius: 8px;
+  background: #172033;
+  color: white;
+  border: 1px solid #475569;
+  font-weight: bold;
+}
+
+.request-body {
+  margin-top: 18px;
+}
+
+.request-body label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.request-body textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border-radius: 8px;
+  background: #111827;
+  color: #e5e7eb;
+  border: 1px solid #475569;
+  font-family: monospace;
+  resize: vertical;
+}
