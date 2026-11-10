@@ -104,7 +104,10 @@ async function sendRequest() {
         "Success! API response received.";
     } else {
       messageOutput.textContent =
-        "HTTP Error: " + response.status;
+  response.ok
+    ? "API request completed successfully."
+    : "API returned HTTP " + response.status +
+      " - " + response.statusText;
     }
 
   } catch (error) {
