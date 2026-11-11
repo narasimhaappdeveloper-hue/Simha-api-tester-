@@ -319,3 +319,184 @@ state.history=safeLoad(STORE.history);
 state.collection=safeLoad(STORE.collection);
 renderHistory();renderCollection();authUI();
 console.log("SIMHA API Suite ready.");
+
+/* SIMHA API SUITE - HISTORY & COLLECTION UPGRADE */
+
+const simhaSearch = {
+  history: "",
+  collection: ""
+};
+
+// Add search boxes
+function addSimhaSearchBoxes() {
+  if (!document.getElementById("simhaHistorySearch")) {
+    el.historyList.insertAdjacentHTML(
+      "beforebegin",
+      `<input
+        id="simhaHistorySearch"
+        type="search"
+        placeholder="Search request history..."
+        class="simha-search"
+      >`
+    );
+  }
+
+  if (!document.getElementById("simhaCollectionSearch")) {
+    el.collectionList.insertAdjacentHTML(
+      "beforebegin",
+      `<input
+        id="simhaCollectionSearch"
+        type="search"
+        placeholder="Search saved requests..."
+        class="simha-search"
+      >`
+    );
+  }
+
+  document.getElementById("simhaHistorySearch")
+    .addEventListener("input", event => {
+      simhaSearch.history = event.target.value.toLowerCase();
+      renderHistory();
+    });
+
+  document.getElementById("simhaCollectionSearch")
+    .addEventListener("input", event => {
+      simhaSearch.collection = event.target.value.toLowerCase();
+      renderCollection();
+    });
+}
+
+// Render history with search and actions
+function renderHistory() {
+  const items = state.history
+    .map((item, index) => ({ item, index }))
+    .filter(({ item }) =>
+      (item.url || "").toLowerCase().includes(simhaSearch.history) ||
+      (item.method || "").toLowerCase().includes(simhaSearch.history)
+    );
+
+  if (!items.length) {
+    el.historyList.innerHTML =
+      '<p class="muted">No matching history found.</p>';
+    return;
+  }
+
+  el.historyList.innerHTML = items.map(({ item, index }) => `
+    <div class="history-row">
+      <div class="history-info">
+        <b>${escapeHTML(item.method)}</b>
+        ${escapeHTML(item.url)}
+        <div class="muted">
+          ${escapeHTML(item.timeLabel || "")}
+          ${item.status ? " · " + escapeHTML(item.status) : ""}
+        </div>
+      </div>
+
+      <button class="btn secondary"
+        data-history-load="${index}">Load</button>
+
+      <button class="btn secondary"
+        data-history-delete="${index}">Delete</button>
+
+      <button class="btn primary"
+        data-history-rerun="${index}">Re-run</button>
+    </div>
+  `).join("");
+}
+
+// Render saved collection with search and delete
+function renderCollection() {
+  const items = state.collection
+    .map((item, index) => ({ item, index }))
+    .filter(({ item }) =>
+      (item.url || "").toLowerCase().includes(simhaSearch.collection) ||
+      (item.method || "").toLowerCase().includes(simhaSearch.collection)
+    );
+
+  if (!items.length) {
+    el.collectionList.innerHTML =
+      '<p class="muted">No matching saved requests.</p>';
+    return;
+  }
+
+  el.collectionList.innerHTML = items.map(({ item, index }) => `
+    <div class="history-row">
+      <div class="history-info">
+        <b>${escapeHTML(item.method)}</b>
+        ${escapeHTML(item.url)}
+        <div class="muted">
+          ${escapeHTML(item.timeLabel || "")}
+        </div>
+      </div>
+
+      <button class="btn secondary"
+        data-collection-load="${index}">Load</button>
+
+      <button class="btn secondary"
+        data-collection-delete="${index}">Delete</button>
+    </div>
+  `).join("");
+}
+
+// Handle individual delete and re-run actions
+function simhaUpgradeActions(event) {
+  const historyDelete = event.target.closest(
+    "[data-history-delete]"
+  );
+
+  const collectionDelete = event.target.closest(
+    "[data-collection-delete]"
+  );
+
+  const historyRerun = event.target.closest(
+    "[data-history-rerun]"
+  );
+
+  if (historyDelete) {
+    const index = Number(historyDelete.dataset.historyDelete);
+
+    state.history.splice(index, 1);
+    persist(STORE.history, state.history);
+    renderHistory();
+    showMessage("History item deleted.");
+  }
+
+  if (collectionDelete) {
+    const index = Number(
+      collectionDelete.dataset.collectionDelete
+    );
+
+    state.collection.splice(index, 1);
+    persist(STORE.collection, state.collection);
+    renderCollection();
+    showMessage("Saved request deleted.");
+  }
+
+  if (historyRerun) {
+    const index = Number(historyRerun.dataset.historyRerun);
+    const item = state.history[index];
+
+    if (item) {
+      loadRequest(item);
+      sendRequest();
+    }
+  }
+}
+
+// Install new features
+addSimhaSearchBoxes();
+
+el.historyList.addEventListener(
+  "click",
+  simhaUpgradeActions
+);
+
+el.collectionList.addEventListener(
+  "click",
+  simhaUpgradeActions
+);
+
+renderHistory();
+renderCollection();
+
+console.log("SIMHA History & Collection Upgrade ready.");
